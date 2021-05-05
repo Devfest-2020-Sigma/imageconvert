@@ -426,8 +426,8 @@ class tspBitCity:
 
 		f = open( outfile, 'w' )
 
-		tx = ( 3200 - self.width ) / 2 if self.width else 0
-		ty = ( 800 + self.height ) / 2 if self.height else 0
+		tx = 0
+		ty = self.height
 
 		# Write the SVG preamble?
 		if ( 1 & int( file_contents ) ):
@@ -441,8 +441,8 @@ class tspBitCity:
 '     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"\n' +
 '     xmlns:dc="http://purl.org/dc/elements/1.1/"\n' +
 '     xmlns:cc="http://creativecommons.org/ns#"\n' +
-'     height="800"\n' +
-'     width="3200">\n' +
+'     height="' + str(self.height) + '"\n' +
+'     width="' + str(self.width) + '">\n' +
 '  <sodipodi:namedview\n' +
 '            showgrid="false"\n' +
 '            showborder="true"\n' +
