@@ -29,13 +29,19 @@ convert ${IMG_OUT}/${IMAGE}.jpg ${IMG_OUT}/${IMAGE}.png
 
 # calcul du svg
 xvfb-run processing-java --sketch=/usr/local/squiggledraw/SquiggleDraw/ --run ${IMG_OUT}/${IMAGE}.png
+set -x
+
+/usr/local/bin/svg_rotate.py --input "${IMG_OUT}/${IMAGE}.svg" --output "${IMG_OUT}/${IMAGE}_rotate.svg"
 
 # on insert le pseudo
-convert -pointsize 70 -font "From-Street-Art" label:${PSEUDO} -threshold 50% -trim +repage -bordercolor white -border 5x5 ${IMG_OUT}/text.ppm
-potrace -s ${IMG_OUT}/text.ppm -b svg --unit 100 --turdsize 5 --turnpolicy black -o ${IMG_OUT}/text.svg
-/usr/local/svg_stack/bin/svg_stack.py --direction=v --margin=0 ${IMG_OUT}/${IMAGE}.svg ${IMG_OUT}/text.svg > ${IMG_OUT}/${IMAGE}_text.svg
-# dirty fix
-sed 's/<svg.*/<svg xmlns:xlink="http:\/\/www.w3.org\/1999\/xlink" style="stroke:black;" xmlns="http:\/\/www.w3.org\/2000\/svg">/g' -i ${IMG_OUT}/${IMAGE}_text.svg
+convert -pointsize 70 -font "From-Street-Art" label:${PSEUDO} -threshold 50% -trim +repage -bordercolor white -border 5x5 -rotate 90 "${IMG_OUT}/text.ppm"
+potrace -s "${IMG_OUT}/text.ppm" -b svg --unit 100 --turdsize 5 --turnpolicy black -o "${IMG_OUT}/text.svg"
+/usr/local/svg_stack/bin/svg_stack.py --direction=h --margin=0 "${IMG_OUT}/${IMAGE}_rotate.svg" ${IMG_OUT}/text.svg > "${IMG_OUT}/${IMAGE}_text.svg"
 
-svg2gcode -B -F -w 280 -t 1 ${IMG_OUT}/${IMAGE}_text.svg ${IMG_OUT}/${IMAGE}.tmp.gcode
-cat ${IMG_OUT}/${IMAGE}.tmp.gcode | uniq > ${IMG_OUT}/${IMAGE}.gcode
+# dirty fix
+# sed 's/<svg.*/<svg xmlns:xlink="http:\/\/www.w3.org\/1999\/xlink" style="stroke:black;" xmlns="http:\/\/www.w3.org\/2000\/svg">/g' -i ${IMG_OUT}/${IMAGE}_text.svg
+
+svg2gcode -B -F -w 280 -t 1 "${IMG_OUT}/${IMAGE}_text.svg" "${IMG_OUT}/${IMAGE}.tmp.gcode"
+cat "${IMG_OUT}/${IMAGE}.tmp.gcode" | uniq > "${IMG_OUT}/${IMAGE}.gcode"
+
+

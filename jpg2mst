@@ -25,17 +25,18 @@ convert $1 ${IMG_IN}/${IMAGE}.jpg
 
 /usr/local/autocrop/bin/autocrop --input ${IMG_IN} --output ${IMG_OUT} --reject ${IMG_REJECT} --height 600 --width 450
 
-
 # calcul du svg
 
-(cd ~/github/tspart && ./tspart_devfest ${IMG_OUT}/${IMAGE}.jpg 4 ${IMG_OUT}/${IMAGE}.svg)
+(cd ~/github/tspart && ./tspart_devfest "${IMG_OUT}/${IMAGE}.jpg" 4 "${IMG_OUT}/${IMAGE}.svg" 2>/dev/null)
 
 # on insert le pseudo
-convert -pointsize 70 -font "From-Street-Art" label:${PSEUDO} -threshold 50% -trim +repage -bordercolor white -border 5x5 ${IMG_OUT}/text.ppm
-potrace -s ${IMG_OUT}/text.ppm -b svg --unit 100 --turdsize 5 --turnpolicy black -o ${IMG_OUT}/text.svg
-/usr/local/svg_stack/bin/svg_stack.py --direction=v --margin=0 ${IMG_OUT}/${IMAGE}.svg ${IMG_OUT}/text.svg > ${IMG_OUT}/${IMAGE}_text.svg
+convert -pointsize 70 -font "From-Street-Art" label:${PSEUDO} -threshold 50% -trim +repage -bordercolor white -border 5x5 "${IMG_OUT}/text.ppm"
+potrace -s "${IMG_OUT}/text.ppm" -b svg --unit 100 --turdsize 5 --turnpolicy black -o "${IMG_OUT}/text.svg"
+/usr/local/svg_stack/bin/svg_stack.py --direction=v --margin=0 "${IMG_OUT}/${IMAGE}.svg" ${IMG_OUT}/text.svg > "${IMG_OUT}/${IMAGE}_text.svg"
 
-svg2gcode -B -F -w 280 -t 1 ${IMG_OUT}/${IMAGE}_text.svg ${IMG_OUT}/${IMAGE}.tmp.gcode
-cat ${IMG_OUT}/${IMAGE}.tmp.gcode | uniq > ${IMG_OUT}/${IMAGE}.gcode
+/usr/local/bin/svg_rotate.py --input "${IMG_OUT}/${IMAGE}_text.svg" --output "${IMG_OUT}/${IMAGE}_text_rotate.svg"
+
+svg2gcode -B -F -w 280 -t 1 "${IMG_OUT}/${IMAGE}_text_rotate.svg" "${IMG_OUT}/${IMAGE}.tmp.gcode"
+cat "${IMG_OUT}/${IMAGE}.tmp.gcode" | uniq > "${IMG_OUT}/${IMAGE}.gcode"
 
 

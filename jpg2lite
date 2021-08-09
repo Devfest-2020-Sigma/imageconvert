@@ -32,8 +32,8 @@ cartoon -p 30 -n 40 -e 6 -m 1 "${IMG_OUT}/${IMAGE}.jpg" "${IMG_OUT}/${IMAGE}.png
 convert "${IMG_OUT}/${IMAGE}.png" -flatten -colorspace Gray -negate -edge 2 -negate -threshold 50% "${IMG_OUT}/${IMAGE}.ppm"
 
 # on insert le pseudo et rotate
-convert -pointsize 70 -font "From-Street-Art" label:${PSEUDO} -threshold 50% -trim +repage -bordercolor white -border 5x5 "${IMG_OUT}/text.ppm"
-convert "${IMG_OUT}/${IMAGE}.ppm" -gravity center "${IMG_OUT}/text.ppm" -append "${IMG_OUT}/image_text.ppm"
+convert -pointsize 70 -font "From-Street-Art" label:${PSEUDO} -threshold 50% -trim +repage -bordercolor white -border 5x5  "${IMG_OUT}/text.ppm"
+convert "${IMG_OUT}/${IMAGE}.ppm" -gravity center "${IMG_OUT}/text.ppm" -append -rotate -90 "${IMG_OUT}/image_text.ppm"
 
 # convert -rotate -90 ${IMG_OUT}/image_text.ppm ${IMG_OUT}/image_text_rotated.ppm
 # potrace -s ${IMG_OUT}/image_text_rotated.ppm -b svg --unit 100 --turdsize 5 --turnpolicy black -o ${IMG_OUT}/${IMAGE}.svg
