@@ -14,7 +14,9 @@ sudo cp -a svg2gcode /usr/local/bin/
 ## tspart
 cd
 git clone https://github.com/Devfest-2020-Sigma/tspart
-
+cd tspart
+cmake -B build .
+cmake --build build
 
 ## Virtualenv
 Folder=/usr/local ; for Package in autocrop opencv-python-headless svg_stack ; do
