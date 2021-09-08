@@ -36,7 +36,9 @@ sudo cp fonts/* /usr/local/share/fonts/
 
 ## SquiggleDraw
 sudo apt install -y xvfb libxrender1 libxtst6
-curl https://processing.org/download/install-arm.sh | sudo sh
+cd ; wget https://github.com/processing/processing/releases/download/processing-0269-3.5.3/processing-3.5.3-linux-armv6hf.tgz
+tar xzf processing-3.5.3-linux-armv6hf.tgz
+cd processing-3.5.3/ ; sudo ./install.sh
 sudo git clone https://github.com/Devfest-2020-Sigma/squiggledraw /usr/local/squiggledraw
 # xvfb-run processing-java --sketch=/usr/local/squiggledraw/SquiggleDraw/ --run P1000146.jpg
 
