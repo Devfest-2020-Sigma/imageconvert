@@ -46,7 +46,8 @@ sudo git clone https://github.com/Devfest-2020-Sigma/squiggledraw /usr/local/squ
 cd ~/imageconvert
 sudo cp tsp_art_tools/*.py jpg2tsp /usr/local/bin/
 sudo chmod +x /usr/local/bin/{tspart.py,tspbitcity.py,tspsolution.py,jpg2tsp}
-cd concorde ; ./configure ; cd LINKERN ; make
+git clone https://github.com/matthelb/concorde.git ~/concorde
+cd ~/concorde ; ./configure ; cd LINKERN ; make
 sudo cp linkern /usr/local/bin/
 
 # Interface web
