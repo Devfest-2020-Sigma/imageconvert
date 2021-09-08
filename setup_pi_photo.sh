@@ -138,7 +138,7 @@ EOF
 cat << EOF | sudo tee /usr/local/bin/LaunchWhenReady
 #!/bin/bash
 while ! netcat -z -w 5 127.0.0.1 4200 ; do
-  sleep 30s
+  sleep 5s
 done
 /usr/bin/chromium --kiosk --incognito http://127.0.0.1:4200
 EOF
