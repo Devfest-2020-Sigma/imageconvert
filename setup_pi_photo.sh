@@ -31,7 +31,7 @@ cd imageconvert
 sudo cp cartoon jpg2* svg_rotate.py tsp_art_tools/*.py /usr/local/bin/
 sudo chmod +x /usr/local/bin/*
 ### fonts
-sudo cp fonts\* /usr/local/share/fonts/
+sudo cp fonts/* /usr/local/share/fonts/
 
 
 ## SquiggleDraw
