@@ -15,6 +15,7 @@ if [ ! -f "$1" ]; then
   exit 3
 fi
 
+
 PSEUDO=$2
 # getting file name
 s=$1

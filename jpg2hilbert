@@ -28,7 +28,7 @@ convert $1 ${IMG_IN}/${IMAGE}.jpg
 
 # calcul du svg
 
-(cd ~/github/tspart && ./tspart_devfest ${IMG_OUT}/${IMAGE}.jpg 1 ${IMG_OUT}/${IMAGE}.svg 2>/dev/null)
+(cd ~/github/tspart && ./tspart_devfest ${IMG_OUT}/${IMAGE}.jpg 1 1500 ${IMG_OUT}/${IMAGE}.svg 2>/dev/null)
 
 # on insert le pseudo
 convert -pointsize 70 -font "From-Street-Art" label:${PSEUDO} -threshold 50% -trim +repage -bordercolor white -border 5x5 "${IMG_OUT}/text.ppm"
