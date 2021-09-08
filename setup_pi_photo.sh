@@ -140,7 +140,7 @@ cat << EOF | sudo tee /usr/local/bin/LaunchWhenReady
 while ! netcat -z -w 5 127.0.0.1 4200 ; do
   sleep 30s
 done
-/usr/bin/chromium-browser --kiosk --incognito http://127.0.0.1:4200
+/usr/bin/chromium --kiosk --incognito http://127.0.0.1:4200
 EOF
 sudo chmod +x /usr/local/bin/LaunchWhenReady
 
