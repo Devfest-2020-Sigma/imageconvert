@@ -7,7 +7,7 @@ sudo apt upgrade -y
 # Installation des prérequis
 sudo apt install -y openjdk-11-jre python3-pip git
 
-wget https://ugs.jfrog.io/ui/api/v1/download?repoKey=UGS&path=v2.0.8%252FUniversalGcodeSender.zip
+wget "https://ugs.jfrog.io/ui/api/v1/download?repoKey=UGS&path=v2.0.8%252FUniversalGcodeSender.zip"
 unzip UniversalGcodeSender.zip
 sudo mv UniversalGcodeSender.jar /usr/local/
 
