@@ -144,3 +144,8 @@ done
 EOF
 sudo chmod +x /usr/local/bin/LaunchWhenReady
 
+# A faire automatiquement :
+# dans /usr/share/X11/xorg.conf.d/40-libinput.conf
+#   Identifier "libinput touchscreen catchall"
+# ajouter
+#   Option "TransformationMatrix" "0 -1 1 1 0 0 0 0 1"
