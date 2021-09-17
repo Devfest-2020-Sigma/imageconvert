@@ -57,10 +57,15 @@ curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
 sudo apt install -y mongodb-server rabbitmq-server nodejs git
 
 sudo rabbitmqctl add_user admin admin
+
 sudo rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
+
 sudo rabbitmq-plugins enable rabbitmq_management
+
 sudo rabbitmqadmin declare queue name=impression-robots durable=true
+
 sudo rabbitmqadmin declare queue name=integration-robots durable=true
+
 sudo git clone https://github.com/Devfest-2020-Sigma/ui-devfest /usr/local/ui
 # update
 # cd /usr/local/ui
