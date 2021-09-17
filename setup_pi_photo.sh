@@ -55,6 +55,7 @@ sudo cp linkern /usr/local/bin/
 # Interface web
 curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
 sudo apt install -y mongodb-server rabbitmq-server nodejs git
+
 sudo rabbitmqctl add_user admin admin
 sudo rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
 sudo rabbitmq-plugins enable rabbitmq_management
