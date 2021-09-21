@@ -4,6 +4,7 @@
 ## Dépendances
 sudo apt update
 sudo apt upgrade -y
+
 sudo apt install -y clang python-virtualenv python3.7 python3-dev bc imagemagick libqtgui4 libqt4-test libavcodec-extra libavformat-dev libswscale5 libatlas3-base potrace git libjasper-dev ffmpeg libzbar0
 
 ## svg2gcode
