@@ -72,8 +72,6 @@ sudo git clone https://github.com/Devfest-2020-Sigma/ui-devfest /usr/local/ui
 cd /usr/local/ui/backend-devfest ; sudo npm install ; sudo npm run build
 cd /usr/local/ui/websocket ; sudo npm install ws 
 cd /usr/local/ui/front-devfest ; sudo npm install ; sudo npm run build
-cd /usr/local/ui/ms-impression-gcode ; sudo npm install  ; sudo npm run build
-
 
 # AutoBoot du node
 ## Le cron
