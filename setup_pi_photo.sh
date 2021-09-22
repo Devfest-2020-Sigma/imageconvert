@@ -81,7 +81,7 @@ EOF
 ## Le script
 cat << EOF | sudo tee /usr/local/sbin/backend
 #!/bin/bash
-cd /usr/local/ui/backend-devfest ; sudo npm start:prod
+cd /usr/local/ui/backend-devfest ; sudo npm run start:prod
 EOF
 sudo chmod +x /usr/local/sbin/backend
 
