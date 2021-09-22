@@ -7,6 +7,14 @@ sudo apt upgrade -y
 # Installation des prérequis
 sudo apt install -y openjdk-11-jre python3-pip git
 
+
+
+## svg2gcode
+git clone https://github.com/Devfest-2020-Sigma/svg2gcode
+cd svg2gcode
+make
+sudo cp -a svg2gcode /usr/local/bin/
+
 wget "https://ugs.jfrog.io/ui/api/v1/download?repoKey=UGS&path=v2.0.8%252FUniversalGcodeSender.zip" -O UniversalGcodeSender.zip
 unzip UniversalGcodeSender.zip UniversalGcodeSender.jar
 sudo mv UniversalGcodeSender.jar /usr/local/
