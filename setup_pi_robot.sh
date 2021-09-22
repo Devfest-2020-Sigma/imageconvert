@@ -45,6 +45,8 @@ sudo chmod +x /usr/local/sbin/ugcs
 curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
 sudo apt install -y nodejs
 
+cd /usr/local/ui/ms-impression-gcode ; sudo git pull ; sudo npm install ; sudo npm run build
+
 sudo git clone https://github.com/Devfest-2020-Sigma/ui-devfest /usr/local/ui
 cat << EOF | sudo tee /etc/cron.d/impressiongcode
 @reboot root /usr/local/sbin/impressiongcode
