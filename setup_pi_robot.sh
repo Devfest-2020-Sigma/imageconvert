@@ -5,7 +5,7 @@ sudo apt update
 sudo apt upgrade -y
 
 # Installation des prérequis
-sudo apt install -y openjdk-11-jre python3-pip git
+sudo apt install -y openjdk-11-jre python3-pip git clang
 
 
 
