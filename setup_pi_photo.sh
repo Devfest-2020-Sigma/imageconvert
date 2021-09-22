@@ -7,12 +7,6 @@ sudo apt upgrade -y
 
 sudo apt install -y clang python-virtualenv python3.7 python3-dev bc imagemagick libqtgui4 libqt4-test libavcodec-extra libavformat-dev libswscale5 libatlas3-base potrace git libjasper-dev ffmpeg libzbar0
 
-## svg2gcode
-git clone https://github.com/Devfest-2020-Sigma/svg2gcode
-cd svg2gcode
-make
-sudo cp -a svg2gcode /usr/local/bin/
-
 ## Virtualenv
 Folder=/usr/local ; for Package in autocrop opencv-python-headless svg_stack ; do
   sudo rm -rf ${Folder}/${Package}
