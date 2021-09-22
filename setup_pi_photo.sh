@@ -112,26 +112,8 @@ cd /usr/local/ui/front-devfest ; sudo npm start
 EOF
 sudo chmod +x /usr/local/sbin/frontend
 
-cat << EOF | sudo tee /etc/cron.d/generationgcode
-@reboot root /usr/local/sbin/generationgcode
-EOF
-## Le script
-cat << EOF | sudo tee /usr/local/sbin/generationgcode
-cd /usr/local/ui/ms-generation-gcode ; sudo npm start :prod
-EOF
-sudo chmod +x /usr/local/sbin/generationgcode
-
-cat << EOF | sudo tee /etc/cron.d/impressiongcode
-@reboot root /usr/local/sbin/impressiongcode
-EOF
-## Le script
-cat << EOF | sudo tee /usr/local/sbin/impressiongcode
-cd /usr/local/ui/ms-impression-gcode ; sudo npm start :prod
-EOF
-sudo chmod +x /usr/local/sbin/impressiongcode
-
 # Kiosk
-sudo apt install -y unclutter chromium 
+sudo apt install -y unclutter chromium
 
 cat << EOF | sudo tee /etc/xdg/lxsession/LXDE-pi/autostart
 xset s off
