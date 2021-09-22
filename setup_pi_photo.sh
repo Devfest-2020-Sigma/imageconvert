@@ -91,6 +91,10 @@ cd /usr/local/ui/backend-devfest ; sudo npm start :prod
 EOF
 sudo chmod +x /usr/local/sbin/backend
 
+## Le cron
+cat << EOF | sudo tee /etc/cron.d/websocket
+@reboot root /usr/local/sbin/websocket
+EOF
 ## Le script
 cat << EOF | sudo tee /usr/local/sbin/websocket
 #!/bin/bash
