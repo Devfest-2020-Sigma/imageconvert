@@ -5,7 +5,7 @@ sudo apt update
 sudo apt upgrade -y
 
 # Installation des prérequis
-sudo apt install -y openjdk-11-jre python3-pip git clang
+sudo apt install -y openjdk-11-jre python3-pip git clang tmux
 
 
 
@@ -37,7 +37,7 @@ else
   exit 42
 fi
 
-java -Xmx512m -cp /usr/local/UniversalGcodeSender.jar com.willwinder.ugs.cli.TerminalClient --controller GRBL --port ${Port} --baud 115200 --print-progressbar --driver JSSC --daemon
+/usr/bin/tmux new-session -d -s ugcs 'java -Xmx512m -cp /usr/local/UniversalGcodeSender.jar com.willwinder.ugs.cli.TerminalClient --controller GRBL --port ${Port} --baud 115200 --print-progressbar --driver JSSC --daemon'
 EOF
 
 sudo chmod +x /usr/local/sbin/ugcs
@@ -54,7 +54,7 @@ EOF
 
 ## Le script
 cat << EOF | sudo tee /usr/local/sbin/impressiongcode
-cd /usr/local/ui/ms-impression-gcode ; sudo npm install ; sudo npm run build ; sudo npm start
+/usr/bin/tmux new-session -d -s front -c /usr/local/ui/ms-impression-gcode 'sudo npm start'
 EOF
 
 sudo chmod +x /usr/local/sbin/impressiongcode
