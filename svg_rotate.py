@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/local/svg/bin/python
 
 import argparse
 import svgutils
