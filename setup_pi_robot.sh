@@ -54,7 +54,7 @@ EOF
 
 ## Le script
 cat << EOF | sudo tee /usr/local/sbin/impressiongcode
-/usr/bin/tmux new-session -d -s front -c /usr/local/ui/ms-impression-gcode 'sudo npm start'
+/usr/bin/tmux new-session -d -s ms-impression-gcode -c /usr/local/ui/ms-impression-gcode 'sudo npm start'
 EOF
 
 sudo chmod +x /usr/local/sbin/impressiongcode
