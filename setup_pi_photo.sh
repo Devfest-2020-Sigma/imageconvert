@@ -81,7 +81,7 @@ EOF
 ## Le script
 cat << EOF | sudo tee /usr/local/sbin/backend
 #!/bin/bash
-cd /usr/local/ui/backend-devfest ; sudo npm run start:prod
+/usr/bin/tmux new-session -d -s backend -c /usr/local/ui/backend-devfest 'sudo npm run start:prod'
 EOF
 sudo chmod +x /usr/local/sbin/backend
 
@@ -92,7 +92,7 @@ EOF
 ## Le script
 cat << EOF | sudo tee /usr/local/sbin/websocket
 #!/bin/bash
-cd /usr/local/ui/websocket ; sudo ./start.sh
+/usr/bin/tmux new-session -d -s websocket -c /usr/local/ui/websocket 'sudo ./start.sh'
 EOF
 sudo chmod +x /usr/local/sbin/websocket
 
@@ -102,7 +102,7 @@ EOF
 ## Le script
 cat << EOF | sudo tee /usr/local/sbin/frontend
 #!/bin/bash
-cd /usr/local/ui/front-devfest ; sudo npm start
+/usr/bin/tmux new-session -d -s front -c /usr/local/ui/front-devfest 'sudo npm start'
 EOF
 sudo chmod +x /usr/local/sbin/frontend
 
