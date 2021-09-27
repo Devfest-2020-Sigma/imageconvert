@@ -6,9 +6,6 @@ sudo apt update
 sudo apt install -y build-essential cmake python3 python3-virtualenv python3-dev python3-pip make bc imagemagick  libavcodec-extra libavformat-dev libswscale5 libatlas3-base potrace git  ffmpeg libzbar0
 sudo apt install -y curl libxrandr-dev libx11-dev libopencv-dev libopengl-dev freeglut3-dev libudev-dev libfreetype-dev libopenal-dev libvorbis-dev libflac-dev net-tools ncdu tmux python
 
-sudo pip install 
-
-
 sudo virtualenv -p python2.7 /usr/local/svg
 sudo /usr/local/svg/bin/pip install --upgrade pip
 sudo /usr/local/svg/bin/pip install lxml argparse svgutils
@@ -31,7 +28,6 @@ Folder=/usr/local ; for Package in svg_stack ; do
   sudo ${Folder}/${Package}/bin/pip install --upgrade lxml six
 done
 
-
 ## Fichiers nécessaires
 ### Scripts
 cd
@@ -42,8 +38,6 @@ sudo cp svg_rotate.py tsp_art_tools/*.py /usr/local/svg/bin/
 sudo chmod +x /usr/local/bin/* /usr/local/svg/bin/
 ### fonts
 sudo cp fonts/* /usr/local/share/fonts/
-
-
 
 ## SquiggleDraw
 sudo apt install -y xvfb libxrender1 libxtst6
@@ -74,12 +68,13 @@ cd /usr/local/ui/ms-generation-gcode ; sudo npm install  ; sudo npm run build
 
 
 # AutoBoot du node
-cat << EOF | sudo tee /etc/cron.d/generationgcode
-@reboot root /usr/local/sbin/generationgcode
+cat << EOF | sudo tee /etc/cron.d/impressiongcode
+@reboot root /usr/local/sbin/impressiongcode
 EOF
-## Le script
-cat << EOF | sudo tee /usr/local/sbin/generationgcode
-cd /usr/local/ui/ms-generation-gcode ; sudo npm start:prod
-EOF
-sudo chmod +x /usr/local/sbin/generationgcode
 
+## Le script
+cat << EOF | sudo tee /usr/local/sbin/impressiongcode
+/usr/bin/tmux new-session -d -s ms-impression-gcode -c /usr/local/ui/ms-impression-gcode 'sudo npm start'
+EOF
+
+sudo chmod +x /usr/local/sbin/impressiongcode
