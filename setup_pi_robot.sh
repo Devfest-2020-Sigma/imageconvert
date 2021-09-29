@@ -52,3 +52,41 @@ myIP=$(hostname -I)
 
 rabbitmqadmin publish exchange=amq.default routing_key=integration-robots payload="{\"pattern\":\"integration-robot\",\"data\":{\"message\":{\"ip\":\"${myIP}\"},\"__EVENT_NAME\":\"RobotRabbitEvent\",\"__TRANSPORTS\":[5]}}" --host=192.168.88.201 --username=admin --password=admin
 EOF
+
+# Gestion des robots en file d'attente
+## Le cron
+cat << EOF | sudo tee /etc/cron.d/sendsvg2gcode
+@reboot root /usr/local/sbin/sendSvg2Gcode
+EOF
+cat << EOF | sudo tee /usr/local/sbin/sendSvg2Gcode
+#!/bin/sh
+
+echo "1" > /sys/class/gpio/export
+echo "in" > /sys/class/gpio/gpio1/direction
+
+while true ; do
+  if grep -q ^1$ /sys/class/gpio/gpio1/value ; then
+    # On a remis la feuille
+    ## On test si on a des choses en attente
+    if ./rabbitmqadmin get queue=impression-gcode --host=192.168.88.201 --username=admin --password=admin count=1 --format=tsv | grep -q "No items" ; then
+      # Rien en attente
+      sleep 5
+      return
+    fi
+    URL='http://192.168.88.201:3000/api/images/getsvg'
+    ID=$(./rabbitmqadmin get queue=impression-gcode --host=192.168.88.201 --username=admin --password=admin count=1 --ackmode=ack_requeue_false --format=tsv | awk '{ print $3 }' | sed 's/.*id":"//g' | sed 's/"}.*//g' | tail -1)
+    FICHIER='impression'
+    FOLDER='/var/devfest/impressions/'
+
+    mkdir -p "${FOLDER}/${ID}"
+
+    curl -s "${URL}/${ID}" --output "${FOLDER}/${ID}/${FICHIER}.svg"
+    svg2gcode -B -F -w 280 "${FOLDER}/${ID}/${FICHIER}.svg" "${FOLDER}/${ID}/${FICHIER}.tmp.gcode"
+    cat "${FOLDER}/${ID}/${FICHIER}.tmp.gcode" | uniq > "${FOLDER}/${ID}/${FICHIER}.gcode"
+
+    curl -X POST 'http://localhost:8080/api/v1/files/uploadAndOpen' --form "file=@${FOLDER}/${ID}/${FICHIER}.gcode"
+    curl -X POST 'http://localhost:8080/api/v1/files/send'
+    sleep 30s
+  fi
+done
+EOF
