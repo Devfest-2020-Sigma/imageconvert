@@ -58,7 +58,7 @@ EOF
 cat << EOF | sudo tee /etc/cron.d/sendsvg2gcode
 @reboot root /usr/local/sbin/sendSvg2Gcode
 EOF
-cat << EOF | sudo tee /usr/local/sbin/sendSvg2Gcode
+cat << 'EOF' | sudo tee /usr/local/sbin/sendSvg2Gcode
 #!/bin/sh
 
 echo "1" > /sys/class/gpio/export
