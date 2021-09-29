@@ -39,3 +39,16 @@ fi
 EOF
 
 sudo chmod +x /usr/local/sbin/ugcs
+
+# Inscription auto du robot dans la file d'attente
+## Le cron
+cat << EOF | sudo tee /etc/cron.d/inscriptionrobot
+@reboot root /usr/local/sbin/InscriptionRobot
+EOF
+cat << EOF | sudo tee /usr/local/sbin/InscriptionRobot
+#!/bin/bash
+
+myIP=$(hostname -I)
+
+rabbitmqadmin publish exchange=amq.default routing_key=integration-robots payload="{\"pattern\":\"integration-robot\",\"data\":{\"message\":{\"ip\":\"${myIP}\"},\"__EVENT_NAME\":\"RobotRabbitEvent\",\"__TRANSPORTS\":[5]}}" --host=192.168.88.201 --username=admin --password=admin
+EOF
