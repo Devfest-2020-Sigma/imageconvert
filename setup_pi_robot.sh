@@ -68,13 +68,13 @@ while true ; do
   if grep -q ^1$ /sys/class/gpio/gpio1/value ; then
     # On a remis la feuille
     ## On test si on a des choses en attente
-    if ./rabbitmqadmin get queue=impression-gcode --host=192.168.88.201 --username=admin --password=admin count=1 --format=tsv | grep -q "No items" ; then
+    if rabbitmqadmin get queue=impression-gcode --host=192.168.88.201 --username=admin --password=admin count=1 --format=tsv | grep -q "No items" ; then
       # Rien en attente
       sleep 5
       return
     fi
     URL='http://192.168.88.201:3000/api/images/getsvg'
-    ID=$(./rabbitmqadmin get queue=impression-gcode --host=192.168.88.201 --username=admin --password=admin count=1 --ackmode=ack_requeue_false --format=tsv | awk '{ print $3 }' | sed 's/.*id":"//g' | sed 's/"}.*//g' | tail -1)
+    ID=$(rabbitmqadmin get queue=impression-gcode --host=192.168.88.201 --username=admin --password=admin count=1 --ackmode=ack_requeue_false --format=tsv | awk '{ print $3 }' | sed 's/.*id":"//g' | sed 's/"}.*//g' | tail -1)
     FICHIER='impression'
     FOLDER='/var/devfest/impressions/'
 
