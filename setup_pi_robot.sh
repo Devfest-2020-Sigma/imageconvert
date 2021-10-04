@@ -35,7 +35,7 @@ else
   exit 42
 fi
 
-/usr/bin/tmux new-session -d -s ugcs 'java -Xmx512m -cp /usr/local/UniversalGcodeSender.jar com.willwinder.ugs.cli.TerminalClient --controller GRBL --port ${Port} --baud 115200 --print-progressbar --driver JSSC --daemon'
+/usr/bin/tmux new-session -d -s ugcs "java -Xmx512m -cp /usr/local/UniversalGcodeSender.jar com.willwinder.ugs.cli.TerminalClient --controller GRBL --port ${Port} --baud 115200 --print-progressbar --driver JSSC --daemon"
 EOF
 
 sudo chmod +x /usr/local/sbin/ugcs
