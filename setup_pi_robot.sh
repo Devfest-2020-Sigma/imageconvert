@@ -23,7 +23,7 @@ cat << EOF | sudo tee /etc/cron.d/java
 @reboot root /usr/local/sbin/ugcs
 EOF
 ## Le script
-cat << EOF | sudo tee /usr/local/sbin/ugcs
+cat << 'EOF' | sudo tee /usr/local/sbin/ugcs
 #!/bin/bash
 
 if lsusb | grep -q 'ID 2341:0043' ; then
