@@ -31,7 +31,7 @@ convert ${IMG_OUT}/${IMAGE}.jpg ${IMG_OUT}/${IMAGE}.png
 xvfb-run processing-java --sketch=/usr/local/squiggledraw/SquiggleDraw/ --run ${IMG_OUT}/${IMAGE}.png
 set -x
 
-/usr/local/bin/svg_rotate.py --input "${IMG_OUT}/${IMAGE}.svg" --output "${IMG_OUT}/${IMAGE}_rotate.svg"
+/usr/local/svg/bin/svg_rotate.py --input "${IMG_OUT}/${IMAGE}.svg" --output "${IMG_OUT}/${IMAGE}_rotate.svg"
 
 # on insert le pseudo
 convert -pointsize 70 -font "From-Street-Art" label:${PSEUDO} -threshold 50% -trim +repage -bordercolor white -border 5x5 -rotate 90 "${IMG_OUT}/text.ppm"

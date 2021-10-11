@@ -10,6 +10,7 @@ sudo virtualenv -p python2.7 /usr/local/svg
 sudo /usr/local/svg/bin/pip install --upgrade pip
 sudo /usr/local/svg/bin/pip install lxml argparse svgutils
 
+
 # libqt5gui5 libjasper
 
 ## tspart
