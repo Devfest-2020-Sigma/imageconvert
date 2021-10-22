@@ -1,0 +1,15 @@
+liens vers les principaux répos :
+
+https://github.com/quinor/tspart
+https://github.com/gwygonik/SquiggleDraw
+https://github.com/holgafreak/svg2gcode
+https://github.com/evil-mad/EggBot/tree/master/other/TSP-stipple/tsp_art_tools
+https://pypi.org/project/autocrop/
+https://pypi.org/project/opencv-python-headless/
+https://pypi.org/project/svg-stack/
+https://pypi.org/project/svgutils/
+https://ffmpeg.org/
+http://potrace.sourceforge.net/
+https://imagemagick.org/
+https://www.rabbitmq.com/
+https://nodesource.com/
